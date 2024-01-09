@@ -1,0 +1,59 @@
+---
+layout: 'page.njk'
+title: 'Exercises'
+---
+
+<div class="exercise-wrapper">
+  {% include 'exerciseFilters.njk' %}
+  {% for exercise in exercises %}
+    <div class="card" id="exercise-card" difficulty="{{exercise.difficulty}}" topic="{{exercise.topic}}">
+      <div class="card-header">
+        Difficulty: {{ exercise.difficulty }} Topic: {{ exercise.topic }}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ exercise.name }}</h5>
+        <p class="card-text">{{ exercise.content }}</p>
+        <a href="#" class="btn btn-primary">To exercise</a>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+<script>
+  const exerciseCards = document.querySelectorAll('#exercise-card');
+  const filters = {
+    difficultyList: [],
+    topicList: [],
+  };
+  const renderFilters = ({ difficultyList, topicList }) => {
+    exerciseCards.forEach((exerciseCard) => {
+      const difficulty = exerciseCard.attributes.getNamedItem('difficulty')?.value;
+      const topic = exerciseCard.attributes.getNamedItem('topic')?.value;
+      const isVisibleByDifficulty = !difficultyList.length || difficultyList.includes(difficulty);
+      const isVidibleByTopic = !topicList.length || topicList.includes(topic);
+      exerciseCard.hidden = !(isVisibleByDifficulty && isVidibleByTopic);
+    })
+  };
+  const selectHandler = (filterKey) => (e) => {
+    filters[filterKey] = e.target.value !== 'Not selected' ? [e.target.value] : [];
+    renderFilters(filters);
+  };
+  document
+    .querySelector('#select-difficulty')
+    .addEventListener('change', selectHandler('difficultyList'));
+  document
+    .querySelector('#select-topic')
+    .addEventListener('change', selectHandler('topicList'));
+</script>
+
+<style> 
+  .exercise-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .exercise-filters {
+    display: flex;
+    gap: 16px;
+  }
+</style>

@@ -5,16 +5,13 @@
     "main": "index.js",
     "scripts": {
         "serve": "npx @11ty/eleventy --serve",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "build": "npx @11ty/eleventy"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
         "@11ty/eleventy": "2.0.1",
-        "@notionhq/client": "^2.2.14",
-        "bootstrap": "5.3.2",
-        "notion-page-to-html": "^1.2.0",
-        "notion-to-md": "3.1.1"
+        "bootstrap": "5.3.2"
     }
 }

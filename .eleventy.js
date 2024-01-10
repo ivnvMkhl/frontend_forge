@@ -4,7 +4,12 @@ const copyPaths = {
     'src/*.css': 'css',
 };
 
-const njkFilters = {};
+const njkFilters = {
+    getPath: (path) => {
+        const relativePath = process.env.RELATIVE_PATH || '';
+        return relativePath + path;
+    },
+};
 
 module.exports = (eleventyConfig) => {
     eleventyConfig.addPassthroughCopy(copyPaths);
@@ -14,7 +19,7 @@ module.exports = (eleventyConfig) => {
     return {
         dir: {
             input: 'src',
-            output: '_public',
+            output: '_site',
             includes: 'includes',
             layouts: 'layouts',
             data: 'data',

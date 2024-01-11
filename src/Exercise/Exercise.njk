@@ -1,0 +1,31 @@
+---
+layout: 'page.njk'
+pagination: 
+    data: exercises
+    size: 1
+    alias: exercise
+permalink: "Exercises/{{ exercise.id | slugify }}/"
+---
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{{ '/Exercises/' | getPath | url }}">Exercises</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ exercise.name }}</li>
+  </ol>
+</nav>
+<h1>{{ exercise.name }}</h1>
+<p>{{ exercise.content }}</p>
+<p>
+  <button type="button" class="btn btn-primary" id="exercise-copy-btn">Copy</button>
+  <button type="button" class="btn btn-primary" id="exercise-paste-btn">Paste</button>
+  <button type="button" class="btn btn-primary" id="exercise-reset-btn">Reset</button>
+</p>
+<p>
+  <div class="form-floating">
+    <textarea class="form-control" placeholder="Enter code here ..." id="exercise-code-area" style="height: 300px">{{ exercise.code}}</textarea>
+    <label for="floatingTextarea2">JavaScript</label>
+  </div>
+</p>
+<button type="button" class="btn btn-primary" id="exercise-send-btn">Send result</button>
+
+<script src="{{ '/Exercise/exercise.script.js' | getPath | url }}" ></script>

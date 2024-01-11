@@ -1,7 +1,6 @@
-const copyPaths = {
+const bootstrapCopy = {
     'node_modules/bootstrap/dist/js/bootstrap.min.js': 'bootstrap/bootstrap.min.js',
     'node_modules/bootstrap/dist/css/bootstrap.min.css': 'bootstrap/bootstrap.min.css',
-    'src/*.css': 'css',
 };
 
 const njkFilters = {
@@ -12,7 +11,9 @@ const njkFilters = {
 };
 
 module.exports = (eleventyConfig) => {
-    eleventyConfig.addPassthroughCopy(copyPaths);
+    eleventyConfig.addPassthroughCopy(bootstrapCopy);
+    eleventyConfig.addPassthroughCopy('src/**/*.css');
+    eleventyConfig.addPassthroughCopy('src/**/*.script.js');
 
     Object.entries(njkFilters).forEach(([filterName, filter]) => eleventyConfig.addNunjucksFilter(filterName, filter));
 
